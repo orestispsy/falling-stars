@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width:100vw;
+    height:100vh;
+    background-color: black;
+}
+
+.star {
+    position:fixed;
+    top:0;
+    left:0;
+    width: 1px;
+    height: 1px;
+    background-color: white;
+    position: fixed;
+    animation: blink 10s infinite ease-in-out;
+}
+
+#star {
+    width: 1px;
+    height: 1px;
+    background-color: white;
+    position: fixed;
+    animation: 3s fall 3s infinite;
+}
+
+
+#star0 {
+    width: 1px;
+    height: 1px;
+    background-color: white;
+    position: fixed;
+    animation: 3s fall2 3s infinite;
+}
+
+@keyframes blink {
+    0% {
+        width: 1px;
+        height: 1px;
+
+    }
+    50% {
+        width: 0px;
+        height: 0px;
+    }
+    70% {
+        width: 1px;
+        height: 1px;
+    }
+}
+
+@keyframes fall {
+    0% {
+        width: 1px;
+        height: 1px;
+        opacity: 100%;
+
+    }
+    30%{
+            width: 2px;
+        height: 2px;
+        color:yellow
+    }
+
+
+    70% {
+        color:white;
+        opacity: 0%;
+                width: 1px;
+        height: 1px;
+
+    }
+    100% {
+        top: 100%;
+        left: 100%;
+        opacity: 0%;
+  
+    }
+}
+
+@keyframes fall2 {
+    0% {
+        width: 1px;
+        height: 1px;
+        opacity: 100%;
+
+    }
+    30%{
+            width: 2px;
+        height: 2px;
+        color:yellow
+    }
+
+
+    70% {
+        color:white;
+        opacity: 0%;
+                width: 1px;
+        height: 1px;
+
+    }
+    100% {
+        top: 100%;
+        left: 0;
+        opacity: 0%;
+  
+    }
+}
+
