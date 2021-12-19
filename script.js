@@ -11,7 +11,7 @@ const createStar = () => {
 };
 
 const createSky = () => {
-    if (starCount < 250) {
+    if (starCount < 350) {
         setTimeout(() => {
             createStar();
             starCount++;
@@ -44,3 +44,14 @@ const fallingStar = () => {
 setTimeout(() => {
     fallingStar();
 }, 1000);
+
+document.addEventListener("click", function (e) {
+    if (e.target.className === "star") {
+            e.target.id="clickstar" 
+            
+            setTimeout(() => {
+               e.target.remove();
+                createStar();
+            }, 2000);
+    }
+});

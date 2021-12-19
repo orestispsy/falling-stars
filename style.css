@@ -7,7 +7,9 @@
 body {
     width:100vw;
     height:100vh;
-    background-color: black;
+background-color: #3d0b0b;
+background-image: linear-gradient(225deg, #3d0b0b 0%, #1e122b 50%, #2B0404 100%);
+
 }
 
 .star {
@@ -21,12 +23,16 @@ body {
     animation: blink 10s infinite ease-in-out;
 }
 
-#star {
+#star, #clickstar{
     width: 1px;
     height: 1px;
     background-color: white;
     position: fixed;
     animation: 3s fall 3s infinite;
+}
+
+#clickstar {
+        animation: fall 3s;
 }
 
 @keyframes blink {
