@@ -26,11 +26,6 @@ const fallingStar = () => {
     if (body[0].firstElementChild.childNodes[0].className !== "star") {
         fallingStar();
     }
-    setTimeout(() => {
-        body[0].firstElementChild.childNodes[0].id = "star";
-
-        fallingStar();
-    }, 5000);
 
     if (body[0].firstElementChild.childNodes[0].id == "star") {
         setTimeout(() => {
@@ -38,6 +33,12 @@ const fallingStar = () => {
             createStar();
         }, 4000);
     }
+
+        setTimeout(() => {
+            body[0].firstElementChild.childNodes[0].id = "star";
+            fallingStar();
+        }, 5000);
+
 };
 
 setTimeout(() => {
