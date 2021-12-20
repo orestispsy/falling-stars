@@ -1,6 +1,8 @@
 var body = document.querySelectorAll("body");
 let starCount = 0;
 
+var xmass = document.querySelectorAll(".XMASS");
+
 const createStar = () => {
     let star = document.createElement("div");
     star.className = "star";
@@ -27,18 +29,35 @@ const fallingStar = () => {
         fallingStar();
     }
 
-    if (body[0].firstElementChild.childNodes[0].id == "star") {
+    if (
+        body[0].firstElementChild.childNodes[0].id == "fallingStarR" ||
+        body[0].firstElementChild.childNodes[0].id == "fallingStarL" ||
+        body[0].firstElementChild.childNodes[0].id == "fallingStarC"
+    ) {
         setTimeout(() => {
             body[0].firstElementChild.childNodes[0].remove();
             createStar();
         }, 4000);
     }
+  if (body[0].firstElementChild.childNodes[0].offsetTop % 3 == 0) {
+  setTimeout(() => {
+      body[0].firstElementChild.childNodes[0].id = "fallingStarL";
+      fallingStar();
+  }, 5000);
 
+  }else if (body[0].firstElementChild.childNodes[0].offsetTop % 5 == 0) {
         setTimeout(() => {
-            body[0].firstElementChild.childNodes[0].id = "star";
+            body[0].firstElementChild.childNodes[0].id = "fallingStarC";
             fallingStar();
         }, 5000);
 
+  } else {
+      setTimeout(() => {
+          body[0].firstElementChild.childNodes[0].id = "fallingStarR";
+          fallingStar();
+      }, 5000);
+  }
+      
 };
 
 setTimeout(() => {
@@ -46,8 +65,17 @@ setTimeout(() => {
 }, 1000);
 
 document.addEventListener("click", function (e) {
+
+  
     if (e.target.className === "star") {
-            e.target.id="clickstar" 
+         if (e.target.offsetTop % 3 == 0){
+         e.target.id = "killStarL"; 
+         } else if (e.target.offsetTop % 5 == 0) {
+                          e.target.id = "killStarC";
+         } else {
+             e.target.id = "killStarR";
+         }
+    
             
             setTimeout(() => {
                e.target.remove();
@@ -55,3 +83,4 @@ document.addEventListener("click", function (e) {
             }, 2000);
     }
 });
+
