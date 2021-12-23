@@ -6,6 +6,9 @@ var hat = document.querySelectorAll(".hat");
 var gun = document.querySelectorAll(".gun");
 var shooter = document.querySelectorAll(".shooter");
 var xmass = document.querySelectorAll(".XMASS");
+var musicTrack = new Audio("./assets/music2.mp3")
+musicTrack.volume=0.5
+
 let starCount = 0;
 let startShooting = false;
 
@@ -74,6 +77,8 @@ setTimeout(() => {
     fallingStar();
 }, 1000);
 
+
+
 document.addEventListener("mousedown", function (e) {
     if (e.target.className == "myPic") {
         myPic[0].style = `animation:fadeOut 2s ease-in-out;`;
@@ -84,7 +89,8 @@ document.addEventListener("mousedown", function (e) {
     }
 
     if (e.target.className === "star" && startShooting) {
-   
+
+   musicTrack.play()
         if (e.target.offsetTop % 3 == 0) {
             e.target.id = "killStarL";
         } else if (e.target.offsetTop % 5 == 0) {
@@ -92,12 +98,16 @@ document.addEventListener("mousedown", function (e) {
         } else {
             e.target.id = "killStarR";
         }
+     
+         
+    
+        
         killStarSound.currentTime = 0;
         killStarSound.play();
-        gun[0].style = `    border-top:5px solid white;`;
+        gun[0].style = `    border-top:5px solid white; top:unset !important`;
         setTimeout(() => {
             gun[0].style = `    border-top:5px solid red;`;
-        }, 4000);
+        }, 1000);
         for (let i = 0; i < sky[0].children.length; i++) {
             sky[0].children[
                 i
@@ -107,6 +117,7 @@ document.addEventListener("mousedown", function (e) {
                 sky[0].children[
                     i
                 ].firstElementChild.style = `background-color:green`;
+            
             }
             if (i % 3 == 0) {
                 sky[0].children[
@@ -117,6 +128,7 @@ document.addEventListener("mousedown", function (e) {
                 sky[0].children[
                     i
                 ].firstElementChild.style = `background-color:blue`;
+              
             }
         }
         setTimeout(() => {

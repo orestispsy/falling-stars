@@ -115,6 +115,7 @@ body {
     animation: fadeIn 6s ease-in-out;
     text-align: center;
     color: yellow;
+    padding:2vmax;
     text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.7),
         1px -1px 5px rgba(255, 255, 255, 0.7),
         -1px -1px 5px rgba(255, 255, 255, 0.7),
@@ -136,14 +137,15 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    width: 60vw;
+    width: 100vw;
     height: 40vh;
     background-color: rgba(137, 43, 226, 0.384);
     font-size: 3vmax;
     letter-spacing: 2px;
     animation: fadeIn 3s ease-in-out;
-    border-radius: 3vh;
+
     box-shadow: 0 0 10px rgba(128, 0, 128, 0.123);
+    padding:5vmax;
 }
 
 
@@ -388,7 +390,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    /* visibility:hidden; */
+    visibility:hidden;
 }
 
 .gun {
@@ -401,4 +403,3 @@ body {
     margin-bottom: -2vmax;
     z-index: 2;
 }
-

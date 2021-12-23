@@ -1,8 +1,6 @@
 var body = document.querySelectorAll("body");
 let starCount = 0;
 
-var xmass = document.querySelectorAll(".XMASS");
-
 const createStar = () => {
     let star = document.createElement("div");
     star.className = "star";
