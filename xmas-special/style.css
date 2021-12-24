@@ -28,9 +28,8 @@ body {
     );
     user-select: none;
     overflow: hidden;
-        font-family: "Megrim", cursive;
+    font-family: "Megrim", cursive;
 }
-
 
 .sky {
     position: fixed;
@@ -41,7 +40,6 @@ body {
     animation: rotate 100s infinite linear;
     animation-delay: 25s;
 }
-
 
 .star {
     display: flex;
@@ -103,7 +101,6 @@ body {
     animation: fallC 2.5s;
 }
 
-
 .XMASS div:nth-child(1) {
     animation: fadeIn 4s ease-in-out, blink2 2s infinite step-end;
 
@@ -114,8 +111,8 @@ body {
 .XMASS div:nth-child(2) {
     animation: fadeIn 6s ease-in-out;
     text-align: center;
-    color: yellow;
-    padding:2vmax;
+    color: rgb(0, 255, 115);
+    padding: 2vmax;
     text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.7),
         1px -1px 5px rgba(255, 255, 255, 0.7),
         -1px -1px 5px rgba(255, 255, 255, 0.7),
@@ -139,15 +136,13 @@ body {
     justify-content: space-evenly;
     width: 100vw;
     height: 40vh;
-    background-color: rgba(137, 43, 226, 0.384);
+    background-color: rgba(226, 43, 211, 0.116);
     font-size: 3vmax;
     letter-spacing: 2px;
     animation: fadeIn 3s ease-in-out;
-
     box-shadow: 0 0 10px rgba(128, 0, 128, 0.123);
-    padding:5vmax;
+    padding: 5vmax;
 }
-
 
 @keyframes rotate {
     100% {
@@ -331,7 +326,6 @@ body {
     }
 }
 
-
 .hat {
     background-image: url("./assets/hat.png");
     background-size: cover;
@@ -354,12 +348,12 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 555;
-        color: white;
+    color: white;
     text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.7),
         1px -1px 5px rgba(255, 255, 255, 0.7),
         -1px -1px 5px rgba(255, 255, 255, 0.7),
         -1px -1px 5px rgba(255, 255, 255, 0.7);
-        font-size:2.5vmax;
+    font-size: 2.5vmax;
 }
 
 .gunBase {
@@ -382,7 +376,6 @@ body {
     border-radius: 50%;
 }
 
-
 .shooter {
     position: fixed;
     bottom: 0;
@@ -390,7 +383,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .gun {
@@ -402,4 +395,21 @@ body {
     border-top: 5px solid red;
     margin-bottom: -2vmax;
     z-index: 2;
+}
+
+.play,
+.mute {
+    background-image: url("./assets/play.png");
+    background-size: cover;
+    width: 2vmax;
+    height: 2vmax;
+    position: fixed;
+    left: 0.5vmax;
+    bottom: 0.5vmax;
+    visibility: hidden;
+}
+
+.mute {
+    background-image: url("./assets/mute.png") !important;
+    visibility: visible;
 }
