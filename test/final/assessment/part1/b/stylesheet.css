@@ -1,0 +1,70 @@
+/*
+See index.html for instructions.
+*/
+
+.flex {
+    display: flex;
+  }
+  
+
+.greybox {
+    background-color: grey ;
+    width: 200px;
+    height: 200px;
+    margin-right: 5px;
+  } 
+
+  .blackbox {
+    position: relative;
+    background-color: black ;
+    width: 200px;
+    height: 200px;
+    margin-right: 5px;
+  } 
+
+  .bluebox {
+    position: relative;
+    background-color: blue ;
+    width: 200px;
+    height: 200px;
+    margin-right: 5px;
+  } 
+
+  .purplebox {
+    position: relative;
+    background-color: purple ;
+    width: 200px;
+    height: 200px;
+  } 
+
+  .orangebox {
+    background-color: orange ;
+    width: 100px;
+    height: 100px;
+    float: right;
+  } 
+
+  .yellowbox {
+    background-color: yellow ;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+     bottom: 0;
+     right: 0;
+  } 
+
+  .greenbox {
+    background-color: green ;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+     bottom: 0;
+     left: 0;
+  }
+
+  .pinkbox {
+    background-color: pink ;
+    width: 100px;
+    height: 100px;
+    float: left;
+  } 

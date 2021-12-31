@@ -9,6 +9,7 @@ font-family: 'Tourney', cursive; */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 body {
@@ -155,4 +156,86 @@ body {
         opacity: 0%;
     }
 }
-/* 
+
+.welcome {
+    border-radius: 50%;
+    width: 45vw;
+    height: 45vw;
+    background-color: rgba(0, 255, 200, 0.068);
+    font-family: "Press Start 2P", cursive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+    box-shadow: 0 0 70px rgba(0, 255, 242, 0.071);
+       transition:1s;
+}
+
+.welcome:hover {
+    transition:1s;
+    box-shadow: 0 0 70px rgba(255, 255, 255, 0.07);
+}
+
+.head {
+    z-index: 3;
+    font-size: 5vmax;
+    text-shadow: -0 0 5px black, 0 -0 5px black, -0 -0 5px black,
+        -0 -0 5px black;
+}
+.headSmall {
+    z-index: 3;
+    font-size: 2vmax;
+    text-shadow: -0 0 5px black, 0 -0 5px black, -0 -0 5px black,
+        -0 -0 5px black;
+}
+
+.welcomeBottomHead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcomeBottom {
+    font-size: 1vmax;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 40vw;
+    margin-top: 2vmax;
+}
+
+.welcomeBottom a {
+    text-align: center;
+    text-decoration: none;
+    padding: 1vmax;
+    margin: 1vmax;
+    background-color: black;
+    color: white;
+    outline: none;
+    z-index: 3;
+}
+
+.welcomeBottom a:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+.ring {
+    position: absolute;
+    border-bottom: 70px solid rgba(188, 250, 250, 0.267);
+    border-top: 60px ridge rgba(0, 255, 255, 0.02);
+    border-bottom-style: groove;
+    border-radius: 76%;
+    transform: rotate(0.45turn);
+    width: 75vw;
+    height: 15vh;
+    margin-top: 10vh;
+}
+
+.copyR {
+    text-shadow: -0 0 5px black, 0 -0 5px black, -0 -0 5px black,
+        -0 -0 5px black;
+}

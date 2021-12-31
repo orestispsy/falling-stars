@@ -1,4 +1,5 @@
 var body = document.querySelectorAll("body");
+
 let starCount = 0;
 
 const createStar = () => {
@@ -37,25 +38,22 @@ const fallingStar = () => {
             createStar();
         }, 4000);
     }
-  if (body[0].firstElementChild.childNodes[0].offsetTop % 3 == 0) {
-  setTimeout(() => {
-      body[0].firstElementChild.childNodes[0].id = "fallingStarL";
-      fallingStar();
-  }, 5000);
-
-  }else if (body[0].firstElementChild.childNodes[0].offsetTop % 5 == 0) {
+    if (body[0].firstElementChild.childNodes[0].offsetTop % 3 == 0) {
+        setTimeout(() => {
+            body[0].firstElementChild.childNodes[0].id = "fallingStarL";
+            fallingStar();
+        }, 5000);
+    } else if (body[0].firstElementChild.childNodes[0].offsetTop % 5 == 0) {
         setTimeout(() => {
             body[0].firstElementChild.childNodes[0].id = "fallingStarC";
             fallingStar();
         }, 5000);
-
-  } else {
-      setTimeout(() => {
-          body[0].firstElementChild.childNodes[0].id = "fallingStarR";
-          fallingStar();
-      }, 5000);
-  }
-      
+    } else {
+        setTimeout(() => {
+            body[0].firstElementChild.childNodes[0].id = "fallingStarR";
+            fallingStar();
+        }, 5000);
+    }
 };
 
 setTimeout(() => {
@@ -63,22 +61,18 @@ setTimeout(() => {
 }, 1000);
 
 document.addEventListener("click", function (e) {
-
-  
     if (e.target.className === "star") {
-         if (e.target.offsetTop % 3 == 0){
-         e.target.id = "killStarL"; 
-         } else if (e.target.offsetTop % 5 == 0) {
-                          e.target.id = "killStarC";
-         } else {
-             e.target.id = "killStarR";
-         }
-    
-            
-            setTimeout(() => {
-               e.target.remove();
-                createStar();
-            }, 2000);
+        if (e.target.offsetTop % 3 == 0) {
+            e.target.id = "killStarL";
+        } else if (e.target.offsetTop % 5 == 0) {
+            e.target.id = "killStarC";
+        } else {
+            e.target.id = "killStarR";
+        }
+
+        setTimeout(() => {
+            e.target.remove();
+            createStar();
+        }, 2000);
     }
 });
-
