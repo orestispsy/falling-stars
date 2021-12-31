@@ -1,18 +1,25 @@
 var body = document.querySelectorAll("body");
+var ring = document.querySelectorAll(".ring");
+var sky = document.querySelectorAll(".sky");
+var linkDescription = document.querySelectorAll(".linkDescription");
 
 let starCount = 0;
 
 const createStar = () => {
     let star = document.createElement("div");
+    let core = document.createElement("div");
     star.className = "star";
-    star.style = `top:${Math.floor(
-        Math.random() * 100 - 1
-    )}%; left:${Math.floor(Math.random() * 100 - 1)}%`;
+    core.className = "core";
+
+    star.append(core);
+    star.style = `top:${-100 + Math.floor(Math.random() * 300 - 1)}%; left:${
+        -100 + Math.floor(Math.random() * 300 - 1)
+    }%`;
     body[0].firstElementChild.appendChild(star.cloneNode(true));
 };
 
 const createSky = () => {
-    if (starCount < 350) {
+    if (starCount < 250) {
         setTimeout(() => {
             createStar();
             starCount++;
@@ -73,5 +80,30 @@ document.addEventListener("click", function (e) {
             e.target.remove();
             createStar();
         }, 2000);
+    }
+});
+
+setTimeout(() => {
+    ring[0].style = "visibility:visible; animation: fadeIn 4s;";
+}, 800);
+
+document.addEventListener("mouseover", function (e) {
+    if (e.target.id.includes("link")) {
+        linkDescription[0].style = `visibility:visible;`;
+
+        ring[0].style =
+            "visibility:visible; shakeRing 10s infinite ease-in-out;";
+        if (e.target.id === "link1") {
+            linkDescription[0].innerHTML = "Learn More About Me And My Work";
+        } else if (e.target.id === "link2") {
+            linkDescription[0].innerHTML =
+                "A Social Network And Concert Agenda with Admin's Tools for the Greek Band 1000mods";
+        } else if (e.target.id === "link3") {
+            linkDescription[0].innerHTML = `Connect4 - The Game`;
+        }
+    } else {
+        linkDescription[0].style = `visibility:hidden;`;
+
+        ring[0].style = "visibility:visible;  animation-play-state: paused;";
     }
 });
