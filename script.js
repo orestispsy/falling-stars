@@ -69,7 +69,6 @@ document.addEventListener("click", function (e) {
         } else {
             e.target.id = "killStarR";
         }
-
         setTimeout(() => {
             e.target.remove();
             createStar();
