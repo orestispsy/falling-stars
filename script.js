@@ -3,9 +3,11 @@ var ring = document.querySelectorAll(".ring");
 var sky = document.querySelectorAll(".sky");
 var linkDescription = document.querySelectorAll(".linkDescription");
 var links = document.querySelectorAll("a");
+var dots = document.querySelectorAll("#dot");
 
 let starCount = 0;
 let projectsCounter = 0;
+let dotCounter = 0;
 
 const createStar = () => {
     let star = document.createElement("div");
@@ -110,7 +112,6 @@ document.addEventListener("mouseover", function (e) {
     }
 });
 
-
 const runFeaturingProjAnimation = () => {
     if (projectsCounter < links.length) {
         setTimeout(() => {
@@ -124,4 +125,62 @@ const runFeaturingProjAnimation = () => {
 
 setTimeout(() => {
     runFeaturingProjAnimation();
-}, 1000);
+}, 2000);
+
+const runDotAnime = () => {
+    if (dotCounter < dots.length) {
+        setTimeout(() => {
+            dots[dotCounter].style = "visibility: visible;";
+            dotCounter++;
+            runDotAnime();
+        }, 500);
+    } else {
+        setTimeout(() => {
+            dots[dotCounter - 1].style = "visibility: visible;";
+        }, 400);
+
+        setTimeout(() => {
+            dots[dotCounter - 1].style = "visibility: hidden;";
+        }, 800);
+        setTimeout(() => {
+            dots[dotCounter - 1].style = "visibility: visible;";
+        }, 1200);
+        setTimeout(() => {
+            dots[dotCounter - 1].style = "visibility: visible;";
+        }, 1600);
+
+        setTimeout(() => {
+            dots[dotCounter - 1].style = "visibility: hidden;";
+        }, 2000);
+        setTimeout(() => {
+            dots[dotCounter - 1].style = "visibility: visible;";
+        }, 2400);
+
+        setTimeout(() => {
+            dots[dotCounter - 1].style = "visibility: visible;";
+        }, 2800);
+
+        setTimeout(() => {
+            dotCounter = dots.length - 1;
+
+            runDotAnimeRewind();
+        }, 3000);
+    }
+};
+
+const runDotAnimeRewind = () => {
+    if (dotCounter >= 0) {
+        setTimeout(() => {
+            dots[dotCounter].style = "visibility: hidden;";
+            dotCounter--;
+            runDotAnimeRewind();
+        }, 500);
+    } else {
+        setTimeout(() => {
+            dotCounter = 0;
+            runDotAnime();
+        }, 1000);
+    }
+};
+
+runDotAnime();
