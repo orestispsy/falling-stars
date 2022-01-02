@@ -143,7 +143,8 @@ body {
     border-radius: 50%;
     width: 45vw;
     height: 45vw;
-    background-color: rgba(0, 255, 200, 0.103);
+       background-color: rgba(0, 255, 200, 0.103);
+   
     font-family: "Press Start 2P", cursive;
     display: flex;
     flex-direction: column;
@@ -490,8 +491,12 @@ body {
         height: 75vw;
     }
 
+      .welcome {
+         background-color: rgba(0, 255, 200, 0.171) !important
+    }
+
     #dot {
-        margin-bottom: -0.5vmax !important;
+        margin-bottom: -0.3vmax !important;
     }
 }
 
@@ -501,12 +506,16 @@ body {
         border-top: 15px ridge rgba(0, 255, 255, 0.02) !important;
     }
 
+    .welcome {
+         background-color: rgba(0, 255, 200, 0.171) !important
+    }
+
     .welcomeBottom a {
         padding: 2vmax !important;
         border: none !important;
     }
 
     #dot {
-        margin-bottom: -0.5vmax !important;
+        margin-bottom: -0.3vmax !important;
     }
 }
