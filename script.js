@@ -2,8 +2,10 @@ var body = document.querySelectorAll("body");
 var ring = document.querySelectorAll(".ring");
 var sky = document.querySelectorAll(".sky");
 var linkDescription = document.querySelectorAll(".linkDescription");
+var links = document.querySelectorAll("a");
 
 let starCount = 0;
+let projectsCounter = 0;
 
 const createStar = () => {
     let star = document.createElement("div");
@@ -97,7 +99,7 @@ document.addEventListener("mouseover", function (e) {
             linkDescription[0].innerHTML = "Learn More About Me And My Work";
         } else if (e.target.id === "link2") {
             linkDescription[0].innerHTML =
-                "A Social Network And Concert Agenda with Admin's Tools for the Greek Band 1000mods";
+                "A Concert Agenda & Fan Based Social Network with Admin Tools for the Greek Band 1000mods";
         } else if (e.target.id === "link3") {
             linkDescription[0].innerHTML = `Connect4 - The Game`;
         }
@@ -107,3 +109,19 @@ document.addEventListener("mouseover", function (e) {
         ring[0].style = "visibility:visible;  animation-play-state: paused;";
     }
 });
+
+
+const runFeaturingProjAnimation = () => {
+    if (projectsCounter < links.length) {
+        setTimeout(() => {
+            links[projectsCounter].style =
+                "visibility: visible; animation: fadeIn 2s ease-in-out";
+            projectsCounter++;
+            runFeaturingProjAnimation();
+        }, 300);
+    }
+};
+
+setTimeout(() => {
+    runFeaturingProjAnimation();
+}, 1000);

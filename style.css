@@ -36,7 +36,7 @@ body {
     width: 100%;
     height: 100%;
     animation: rotate 100s infinite linear;
-    animation-delay: 2s;
+    animation-delay: 6s;
 }
 
 .star {
@@ -177,8 +177,20 @@ body {
 .headSmall {
     z-index: 3;
     font-size: 1.5vmax;
-    text-shadow: -0 0 5px black, 0 -0 5px black, -0 -0 5px black,
-        -0 -0 5px black;
+    text-shadow: -0 0 10px rgba(0, 255, 255, 0.178),
+        0 -0 10px rgba(0, 255, 255, 0.178), -0 -0 10px rgba(0, 255, 255, 0.178),
+        -0 -0 10px rgba(0, 255, 255, 0.178);
+    color: black;
+    padding: 1vmax;
+    animation: fadeIn 4s ease-in-out, 3s flash 2s ease-in-out;
+}
+
+.headSmall::before {
+    position: absolute;
+    content: "Featuring Projects";
+    color: white;
+    margin-left: -4px;
+    margin-top: 3px;
 }
 
 .headSmaller {
@@ -209,11 +221,13 @@ body {
     text-align: center;
     text-decoration: none;
     padding: 1vmax;
-    margin: 0 1vmax;
+    margin: 0 1vmax -2vmax 1vmax;
     background-color: rgba(0, 0, 0, 0.712);
     color: white;
     outline: none;
     z-index: 3;
+    line-height: 1.5vmax;
+    visibility: hidden;
 }
 
 .welcomeBottom a:hover {
@@ -222,9 +236,12 @@ body {
 }
 
 .footer {
+    position: fixed;
+    right: 1vmax;
+    bottom: 0.5vmax;
     text-shadow: -0 0 5px black, 0 -0 5px black, -0 -0 5px black,
         -0 -0 5px black;
-    font-size: 1vmax;
+    font-size: 0.5vmax;
 }
 
 .linkDescription {
@@ -232,14 +249,19 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 3vmax;
+    margin-top: 4vmax;
     margin-bottom: -3vmax;
     width: 30vw;
-    height: 10vh;
-    background-color: rgba(251, 255, 0, 0.041);
+    height: 15vh;
+
     visibility: hidden;
     text-align: center;
-    padding: 1vmax;
+    padding: 0.5vmax;
+    z-index: 3;
+    line-height: 2vmax;
+    font-size: 1vmax;
+    text-shadow: -0 0 5px black, 0 -0 5px black, -0 -0 5px black,
+        -0 -0 5px black;
 }
 
 @keyframes blink {
@@ -409,5 +431,23 @@ body {
 
     100% {
         transform: rotate(0.45turn);
+    }
+}
+
+@keyframes flash {
+    0% {
+        text-shadow: -0 0 10px rgba(0, 255, 255, 0.178),
+            0 -0 10px rgba(0, 255, 255, 0.178),
+            -0 -0 10px rgba(0, 255, 255, 0.178),
+            -0 -0 10px rgba(0, 255, 255, 0.178);
+        color: black;
+    }
+
+    50% {
+        text-shadow: -0 0 50px rgba(0, 255, 255, 0.178),
+            0 -0 50px rgba(0, 255, 255, 0.03),
+            -0 -0 50px rgba(0, 255, 255, 0.03),
+            -0 -0 50px rgba(0, 255, 255, 0.03);
+        color: black;
     }
 }
