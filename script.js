@@ -9,6 +9,8 @@ let starCount = 0;
 let projectsCounter = 0;
 let dotCounter = 0;
 
+ring[0].style="visibility:hidden"
+
 const createStar = () => {
     let star = document.createElement("div");
     let core = document.createElement("div");
