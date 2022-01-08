@@ -4,12 +4,10 @@ var sky = document.querySelectorAll(".sky");
 var linkDescription = document.querySelectorAll(".linkDescription");
 var links = document.querySelectorAll("a");
 var dots = document.querySelectorAll("#dot");
-
+var introStar
 let starCount = 0;
 let projectsCounter = 0;
 let dotCounter = 0;
-
-ring[0].style="visibility:hidden"
 
 const createStar = () => {
     let star = document.createElement("div");
@@ -22,6 +20,13 @@ const createStar = () => {
         -100 + Math.floor(Math.random() * 300 - 1)
     }%`;
     body[0].firstElementChild.appendChild(star.cloneNode(true));
+};
+
+const createIntroStar = () => {
+    let star = document.createElement("div");
+    star.className = "introStar";
+    body[0].firstElementChild.appendChild(star);
+    introStar = document.querySelectorAll(".introStar");
 };
 
 const createSky = () => {
@@ -71,7 +76,12 @@ const fallingStar = () => {
 
 setTimeout(() => {
     fallingStar();
+    createIntroStar();
 }, 1000);
+
+setTimeout(() => {
+    introStar[0].remove();
+}, 7000);
 
 document.addEventListener("click", function (e) {
     if (e.target.className === "star") {
@@ -90,8 +100,8 @@ document.addEventListener("click", function (e) {
 });
 
 setTimeout(() => {
-    ring[0].style = "visibility:visible; animation: fadeIn 4s;";
-}, 800);
+    ring[0].style = "visibility:visible; animation: fadeIn 4s; ";
+}, 1500);
 
 document.addEventListener("mouseover", function (e) {
     if (e.target.id.includes("link")) {

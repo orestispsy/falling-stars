@@ -39,6 +39,17 @@ body {
     animation-delay: 7s;
 }
 
+.introStar {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 2px;
+    height: 2px;
+    background-color: white;
+        animation: shinyFall 2.5s;
+            animation-delay: 4s;
+}
+
 .star {
     display: flex;
     flex-direction: column;
@@ -112,7 +123,9 @@ body {
     height: 15vh;
     margin-top: 10vh;
     animation: shakeRing 8s infinite ease-in-out;
+    visibility:hidden;
 }
+
 
 .welcome::before {
     border-top: 2px solid rgba(0, 0, 0, 0.062);
@@ -141,8 +154,7 @@ body {
     border-radius: 50%;
     width: 45vw;
     height: 45vw;
-       background-color: rgba(0, 255, 200, 0.103);
-   
+    background-color: rgba(0, 255, 200, 0.103);
     font-family: "Press Start 2P", cursive;
     display: flex;
     flex-direction: column;
@@ -151,7 +163,7 @@ body {
     color: white;
     box-shadow: 0 0 70px rgba(0, 255, 242, 0.071);
     transition: 1s;
-    animation: fadeIn 6s;
+    animation: fadeIn 8s;
 }
 
 .welcome:hover {
@@ -292,6 +304,39 @@ body {
     70% {
         width: 1px;
         height: 1px;
+    }
+}
+
+@keyframes shinyFall {
+    0% {
+        width: 2px;
+        height: 2px;
+        opacity: 100%;
+      box-shadow: 0 0 150px rgb(255, 255, 255);
+    }
+    30% {
+        width: 3px;
+        height: 3px;
+        color: yellow;
+    
+    }
+
+    70% {
+        width: 3px;
+        height: 3px;
+        color: yellow;
+    }
+
+    90% {
+        color: white;
+        opacity: 0%;
+        width: 1px;
+        height: 1px;
+    }
+    100% {
+        top: 100%;
+        left: 100%;
+        opacity: 0%;
     }
 }
 
@@ -475,8 +520,6 @@ body {
         margin: 0 !important;
     }
 
-
-
     .welcomeBottom {
         width: unset !important;
     }
@@ -487,8 +530,8 @@ body {
         height: 75vw;
     }
 
-      .welcome {
-         background-color: rgba(0, 255, 200, 0.171) !important
+    .welcome {
+        background-color: rgba(0, 255, 200, 0.171) !important;
     }
 
     #dot {
@@ -503,10 +546,9 @@ body {
     }
 
     .welcome {
-         background-color: rgba(0, 255, 200, 0.171) !important
+        background-color: rgba(0, 255, 200, 0.171) !important;
     }
 
- 
     #dot {
         margin-bottom: -0.3vmax !important;
     }
