@@ -4,10 +4,11 @@ var sky = document.querySelectorAll(".sky");
 var linkDescription = document.querySelectorAll(".linkDescription");
 var links = document.querySelectorAll("a");
 var dots = document.querySelectorAll("#dot");
-var introStar
+var introStar;
 let starCount = 0;
 let projectsCounter = 0;
 let dotCounter = 0;
+let ringIsLeft = true;
 
 const createStar = () => {
     let star = document.createElement("div");
@@ -103,24 +104,30 @@ setTimeout(() => {
     ring[0].style = "visibility:visible; animation: fadeIn 4s; ";
 }, 1500);
 
-document.addEventListener("mouseover", function (e) {
+document.addEventListener("click", function (e) {
     if (e.target.id.includes("link")) {
         linkDescription[0].style = `visibility:visible;`;
+        if (ringIsLeft) {
+            ringIsLeft = false;
+            ring[0].style =
+                "visibility:visible; transform: rotate(0.55turn); transition:3.5s";
+        } else {
+            ringIsLeft = true;
+            ring[0].style =
+                "visibility:visible; transform: rotate(0.45turn); transition:3.5s";
+        }
 
-        ring[0].style =
-            "visibility:visible; shakeRing 10s infinite ease-in-out;";
         if (e.target.id === "link1") {
-            linkDescription[0].innerHTML = "Learn More About Me And My Work";
+            linkDescription[0].innerHTML =
+                "Learn More About Me And My Work<a href='https://zero-psy.com' target='_blank'>Visit Page</a>";
         } else if (e.target.id === "link2") {
             linkDescription[0].innerHTML =
-                "A Concert Agenda & Fan Based Social Network with Admin Tools for the Greek Band 1000mods";
+                "A Concert Agenda & Fan Based Social Network with Admin Tools for the Greek Band 1000mods <a href='https://1000gigs.zero-psy.com' target='_blank'>Visit Page</a>";
         } else if (e.target.id === "link3") {
-            linkDescription[0].innerHTML = `Connect4 - The Game`;
+            linkDescription[0].innerHTML = `Connect4 - The Game <a href='https://zero-psy.com/c4' target='_blank'>Visit Page</a>`;
         }
     } else {
         linkDescription[0].style = `visibility:hidden;`;
-
-        ring[0].style = "visibility:visible;  animation-play-state: paused;";
     }
 });
 
