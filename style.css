@@ -528,6 +528,11 @@ body {
     #dot {
         margin-bottom: -0.3vmax !important;
     }
+
+    .linkDescription {
+        width: 50vw !important;
+        justify-content: unset !important;
+    }
 }
 
 @media only screen and (min-device-width: 273px) and (max-device-width: 1024px) and (orientation: landscape) {
@@ -548,8 +553,9 @@ body {
 .cannon {
     width: 0.2vmax;
     height: 0.5vmax;
-    background-color: white;
+    background-color: cyan;
     transition: 0.07s;
+    border-radius: 3vh;
 }
 
 .base {
@@ -562,10 +568,27 @@ body {
 
 .destroyer {
     position: fixed;
-    bottom: 0.5vmax;
-    left: 50%;
+    bottom: 0.25vmax;
+    left: 0.5vmax;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 1.5vmax;
+}
+
+.wingsTop,
+.wingsBottom {
+    position: absolute;
+    width: 5vmax;
+    height: 0.5vmax;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.589);
+    border-left: 1px solid rgba(251, 255, 0, 0.289);
+    border-right: 1px solid rgba(255, 255, 0, 0.289);
+}
+
+.wingsBottom {
+    margin-top: 1vmax;
+    border-bottom:none;
+
 }

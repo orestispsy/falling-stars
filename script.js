@@ -18,7 +18,6 @@ const createStar = () => {
     let core = document.createElement("div");
     star.className = "star";
     core.className = "core";
-
     star.append(core);
     star.style = `top:${-100 + Math.floor(Math.random() * 300 - 1)}%; left:${
         -100 + Math.floor(Math.random() * 300 - 1)
@@ -87,21 +86,22 @@ setTimeout(() => {
     introStar[0].remove();
 }, 7000);
 
+document.addEventListener("mousedown", function (e) {
+    cannon[0].style = `    box-shadow:0 0 50px white; position:fixed;transform: translateY(-${
+        body[0].offsetHeight - e.clientY - cannon[0].offsetHeight -10
+    }px)   `;
+    setTimeout(() => {
+        cannon[0].remove();
+        let elem = document.createElement("div");
+        elem.className = "cannon";
+
+        destroyer[0].prepend(elem);
+        cannon = document.querySelectorAll(".cannon");
+    }, 50);
+});
+
 document.addEventListener("click", function (e) {
-     cannon[0].style = `position:fixed;transform: translateY(-${
-         body[0].offsetHeight - e.clientY - cannon[0].offsetWidth
-     }px)   `;
-     setTimeout(() => {
-         cannon[0].remove();
-          let elem = document.createElement("div");
-          elem.className = "cannon";
-
-          destroyer[0].prepend(elem);
-          cannon = document.querySelectorAll(".cannon");
-     }, 50);
-
     if (e.target.className === "star") {
-      
         if (e.target.offsetTop % 3 == 0) {
             e.target.id = "killStarL";
         } else if (e.target.offsetTop % 5 == 0) {
@@ -110,7 +110,6 @@ document.addEventListener("click", function (e) {
             e.target.id = "killStarR";
         }
         setTimeout(() => {
-
             e.target.remove();
             createStar();
         }, 2000);
@@ -221,8 +220,6 @@ const runDotAnimeRewind = () => {
 
 runDotAnime();
 
-
 document.addEventListener("mousemove", function (e) {
-    console.log(destroyer[0].offsetLeft)
- destroyer[0].style=`left:${e.clientX -0.5*destroyer[0].offsetWidth}px`
-})
+    destroyer[0].style = `left:${e.clientX - 0.5 * destroyer[0].offsetWidth}px`;
+});
