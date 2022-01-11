@@ -6,6 +6,9 @@ var links = document.querySelectorAll("a");
 var dots = document.querySelectorAll("#dot");
 var destroyer = document.querySelectorAll(".destroyer");
 var cannon = document.querySelectorAll(".cannon");
+var rockets = document.querySelectorAll(".rocket");
+var wingsTop = document.querySelectorAll(".wingsTop");
+
 
 var introStar;
 let starCount = 0;
@@ -87,20 +90,58 @@ setTimeout(() => {
 }, 7000);
 
 document.addEventListener("mousedown", function (e) {
+
+
+     wingsTop[0].style = "justify-content:center;";
     cannon[0].style = `    box-shadow:0 0 50px white; position:fixed;transform: translateY(-${
-        body[0].offsetHeight - e.clientY - cannon[0].offsetHeight -10
+        body[0].offsetHeight - e.clientY - cannon[0].offsetHeight - 10
     }px)   `;
+    rockets.forEach((rocket) => {
+        if (rocket.id === "r2") {
+            rocket.style = `box-shadow:0 0 50px white; position:fixed;transform: translateY(-${
+                body[0].offsetHeight - e.clientY - rockets[0].offsetHeight - 15
+            }px) translateX(-1vmax) ; transition:0.2s `;
+        } else {
+            rocket.style = `box-shadow:0 0 50px white; position:fixed;transform: translateY(-${
+                body[0].offsetHeight - e.clientY - rockets[0].offsetHeight - 15
+            }px) translateX( 1vmax); transition:0.2s `;
+        }
+    });
+
     setTimeout(() => {
         cannon[0].remove();
+
         let elem = document.createElement("div");
+
         elem.className = "cannon";
 
         destroyer[0].prepend(elem);
         cannon = document.querySelectorAll(".cannon");
     }, 50);
+
+    setTimeout(() => {
+        rockets.forEach((rocket) => {
+            rocket.remove();
+        });
+
+        let rocket = document.createElement("div");
+
+        rocket.className = "rocket";
+        rocket.id = "r1";
+        wingsTop[0].appendChild(rocket.cloneNode(true));
+
+        wingsTop[0].appendChild(rocket.cloneNode(true));
+        rockets = document.querySelectorAll(".rocket");
+        rockets[rockets.length - 1].id = "r2";
+   
+             wingsTop[0].style = "justify-content:space-between";
+    }, 150);
 });
 
+
+
 document.addEventListener("click", function (e) {
+
     if (e.target.className === "star") {
         if (e.target.offsetTop % 3 == 0) {
             e.target.id = "killStarL";
@@ -223,3 +264,4 @@ runDotAnime();
 document.addEventListener("mousemove", function (e) {
     destroyer[0].style = `left:${e.clientX - 0.5 * destroyer[0].offsetWidth}px`;
 });
+

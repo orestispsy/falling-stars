@@ -592,3 +592,37 @@ body {
     border-bottom:none;
 
 }
+
+.wingsTop{
+        display: flex;
+  justify-content: space-between;
+        width: 5.2vmax;
+}
+
+
+
+
+.rocket {
+    width:0.2vmax;
+    height:0.5vmax;
+    background-color: rgb(255, 251, 0);
+
+}
+
+
+
+.saucer {
+    cursor:crosshair;
+    position:fixed;
+    left:-15vmax;
+    top:-0vmax;
+    width:2vmax;
+    height:2vmax;
+            border-bottom: 20px groove rgba(188, 250, 250, 0.151);
+    border-top: 15px ridge rgba(200, 255, 0, 0.11);
+
+    border-radius:50%;
+    animation:saucerMove 25s infinite;
+    animation-delay: 2s;
+}
+
