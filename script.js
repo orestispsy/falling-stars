@@ -8,7 +8,7 @@ var destroyer = document.querySelectorAll(".destroyer");
 var cannon = document.querySelectorAll(".cannon");
 var rockets = document.querySelectorAll(".rocket");
 var wingsTop = document.querySelectorAll(".wingsTop");
-
+var saucer = document.querySelectorAll(".saucer");
 
 var introStar;
 let starCount = 0;
@@ -90,9 +90,7 @@ setTimeout(() => {
 }, 7000);
 
 document.addEventListener("mousedown", function (e) {
-
-
-     wingsTop[0].style = "justify-content:center;";
+    wingsTop[0].style = "justify-content:center;";
     cannon[0].style = `    box-shadow:0 0 50px white; position:fixed;transform: translateY(-${
         body[0].offsetHeight - e.clientY - cannon[0].offsetHeight - 10
     }px)   `;
@@ -133,15 +131,65 @@ document.addEventListener("mousedown", function (e) {
         wingsTop[0].appendChild(rocket.cloneNode(true));
         rockets = document.querySelectorAll(".rocket");
         rockets[rockets.length - 1].id = "r2";
-   
-             wingsTop[0].style = "justify-content:space-between";
+
+        wingsTop[0].style = "justify-content:space-between";
     }, 150);
 });
 
+const saucerAnimationInspector = () => {
+    saucer[0].addEventListener("animationend", () => {
+        saucerCounter++;
+        if (saucerCounter % 4 == 0) {
+            saucer[0].id = "saucerX";
+        } else if (saucerCounter % 2 == 0) {
+            saucer[0].id = "saucerHigh";
+        } else if (saucerCounter % 3 == 0) {
+            saucer[0].id = "saucerMidRight";
+        } else {
+            saucer[0].id = "saucerLow";
+        }
+    });
+};
 
+saucerAnimationInspector();
 
-document.addEventListener("click", function (e) {
+var saucerCounter = 1;
+document.addEventListener("mousedown", function (e) {
+    e.preventDefault();
 
+    if (e.target.className === "saucer") {
+         setTimeout(() => {
+          
+                 e.target.style =
+                     "transform:translateY(100vh) translateX(-5vw) rotate(-360deg); transition:1s";
+                 setTimeout(() => {
+                     e.target.remove();
+                 }, 1000);
+             
+         }, 200);
+
+        setTimeout(() => {
+            saucerCounter++;
+            let elem = document.createElement("div");
+            elem.appendChild(elem.cloneNode(true));
+            elem.firstElementChild.appendChild(elem.cloneNode(true));
+            elem.className = "saucer";
+            if (saucerCounter % 4 == 0) {
+                elem.id = "saucerX";
+            } else if (saucerCounter % 2 == 0) {
+                elem.id = "saucerHigh";
+            } else if (saucerCounter % 3 == 0) {
+                elem.id = "saucerMidRight";
+            } else {
+                elem.id = "saucerLow";
+            }
+
+            body[0].appendChild(elem);
+            saucer = document.querySelectorAll(".saucer");
+
+            saucerAnimationInspector();
+        }, 1000);
+    }
     if (e.target.className === "star") {
         if (e.target.offsetTop % 3 == 0) {
             e.target.id = "killStarL";
@@ -264,4 +312,3 @@ runDotAnime();
 document.addEventListener("mousemove", function (e) {
     destroyer[0].style = `left:${e.clientX - 0.5 * destroyer[0].offsetWidth}px`;
 });
-
