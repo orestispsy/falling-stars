@@ -137,7 +137,7 @@ document.addEventListener("mousedown", function (e) {
 });
 
 const saucerAnimationInspector = () => {
-    saucer[0].addEventListener("animationend", () => {
+    saucer[saucer.length - 1].addEventListener("animationend", () => {
         saucerCounter++;
         if (saucerCounter % 4 == 0) {
             saucer[0].id = "saucerX";
@@ -152,43 +152,68 @@ const saucerAnimationInspector = () => {
 };
 
 saucerAnimationInspector();
-
+var saucerClone;
+var killallow = true;
 var saucerCounter = 1;
 document.addEventListener("mousedown", function (e) {
     e.preventDefault();
 
-    if (e.target.className === "saucer") {
-         setTimeout(() => {
-          
-                 e.target.style =
-                     "transform:translateY(100vh) translateX(-5vw) rotate(-360deg); transition:1s";
-                 setTimeout(() => {
-                     e.target.remove();
-                 }, 1000);
-             
-         }, 200);
-
+    if (
+        (e.target.className === "saucer" && killallow) ||
+        (e.target.className === "saucerClone" && killallow)
+    ) {
+        killallow = false;
         setTimeout(() => {
-            saucerCounter++;
-            let elem = document.createElement("div");
-            elem.appendChild(elem.cloneNode(true));
-            elem.firstElementChild.appendChild(elem.cloneNode(true));
-            elem.className = "saucer";
-            if (saucerCounter % 4 == 0) {
-                elem.id = "saucerX";
-            } else if (saucerCounter % 2 == 0) {
-                elem.id = "saucerHigh";
-            } else if (saucerCounter % 3 == 0) {
-                elem.id = "saucerMidRight";
-            } else {
-                elem.id = "saucerLow";
-            }
-
-            body[0].appendChild(elem);
-            saucer = document.querySelectorAll(".saucer");
-
             saucerAnimationInspector();
-        }, 1000);
+            e.target.style =
+                "transform:translateY(100vh) translateX(-5vw) rotate(-360deg); transition:1s";
+            setTimeout(() => {
+                if (e.target.className === "saucer") {
+                    e.target.remove();
+                }
+                killallow = true;
+            }, 1000);
+        }, 200);
+        if (e.target.className === "saucer") {
+            setTimeout(() => {
+                saucerCounter++;
+                let elem = document.createElement("div");
+                elem.appendChild(elem.cloneNode(true));
+                elem.firstElementChild.appendChild(elem.cloneNode(true));
+                elem.className = "saucer";
+
+                if (saucerCounter % 4 == 0) {
+                    elem.id = "saucerX";
+                } else if (saucerCounter % 2 == 0) {
+                    elem.id = "saucerHigh";
+                } else if (saucerCounter % 3 == 0) {
+                    elem.id = "saucerMidRight";
+                } else {
+                    elem.id = "saucerLow";
+                }
+
+                body[0].appendChild(elem);
+                saucer = document.querySelectorAll(".saucer");
+
+                saucerAnimationInspector();
+            }, 1500);
+        }
+
+        if (e.target.className === "saucerClone") {
+            setTimeout(() => {
+                e.target.remove();
+            }, 2000);
+        }
+
+        if (saucerCounter % 2 == 0 && e.target.className === "saucer") {
+            let elem2 = document.createElement("div");
+            elem2.appendChild(elem2.cloneNode(true));
+            elem2.firstElementChild.appendChild(elem2.cloneNode(true));
+            elem2.className = "saucerClone";
+            elem2.id = "saucerX";
+            body[0].appendChild(elem2);
+            saucerClone = document.querySelectorAll(".saucerClone");
+        }
     }
     if (e.target.className === "star") {
         if (e.target.offsetTop % 3 == 0) {
