@@ -9,12 +9,19 @@ var cannon = document.querySelectorAll(".cannon");
 var rockets = document.querySelectorAll(".rocket");
 var wingsTop = document.querySelectorAll(".wingsTop");
 var saucer = document.querySelectorAll(".saucer");
+var saucerClone = false;
 
 var introStar;
 let starCount = 0;
 let projectsCounter = 0;
 let dotCounter = 0;
 let ringIsLeft = true;
+
+let saucerElem;
+let saucerCloneElem;
+var allowSaucerKill = true;
+var saucerCounter = 1;
+var saucerCloneCounter = 1;
 
 const createStar = () => {
     let star = document.createElement("div");
@@ -108,11 +115,8 @@ document.addEventListener("mousedown", function (e) {
 
     setTimeout(() => {
         cannon[0].remove();
-
         let elem = document.createElement("div");
-
         elem.className = "cannon";
-
         destroyer[0].prepend(elem);
         cannon = document.querySelectorAll(".cannon");
     }, 50);
@@ -121,23 +125,20 @@ document.addEventListener("mousedown", function (e) {
         rockets.forEach((rocket) => {
             rocket.remove();
         });
-
         let rocket = document.createElement("div");
-
         rocket.className = "rocket";
         rocket.id = "r1";
         wingsTop[0].appendChild(rocket.cloneNode(true));
-
         wingsTop[0].appendChild(rocket.cloneNode(true));
         rockets = document.querySelectorAll(".rocket");
         rockets[rockets.length - 1].id = "r2";
-
         wingsTop[0].style = "justify-content:space-between";
     }, 150);
 });
 
 const saucerAnimationInspector = () => {
     saucer[saucer.length - 1].addEventListener("animationend", () => {
+        console.log("yo");
         saucerCounter++;
         if (saucerCounter % 4 == 0) {
             saucer[0].id = "saucerX";
@@ -149,20 +150,50 @@ const saucerAnimationInspector = () => {
             saucer[0].id = "saucerLow";
         }
     });
+    if (saucerClone) {
+        saucerClone[0].addEventListener("animationend", () => {
+            saucerClone.forEach((saucer) => {
+                saucer.style = `  transform: translateY(-100vh); transition:5s`;
+            });
+            setTimeout(() => {
+                for (let i = 0; i < saucerClone.length; i++) {
+                    saucerClone[i].remove();
+                }
+            }, 5000);
+        });
+    }
 };
 
 saucerAnimationInspector();
-var saucerClone;
-var killallow = true;
-var saucerCounter = 1;
-document.addEventListener("mousedown", function (e) {
-    e.preventDefault();
 
+
+const createSaucer = (prop1, prop2) => {
+    saucerCounter++;
+    prop1 = document.createElement("div");
+    prop1.appendChild(prop1.cloneNode(true));
+    prop1.firstElementChild.appendChild(prop1.cloneNode(true));
+    prop1.className = prop2;
+    if (saucerCounter % 4 == 0) {
+        prop1.id = "saucerX";
+    } else if (saucerCounter % 2 == 0) {
+        prop1.id = "saucerHigh";
+    } else if (saucerCounter % 3 == 0) {
+        prop1.id = "saucerMidRight";
+    } else {
+        prop1.id = "saucerLow";
+    }
+    body[0].appendChild(prop1);
+    saucer = document.querySelectorAll(`.saucer`);
+    saucerClone = document.querySelectorAll(`.saucerClone`);
+    saucerAnimationInspector();
+};
+
+document.addEventListener("mousedown", function (e) {
     if (
-        (e.target.className === "saucer" && killallow) ||
-        (e.target.className === "saucerClone" && killallow)
+        (e.target.className === "saucer" && allowSaucerKill) ||
+        (e.target.className === "saucerClone" && allowSaucerKill)
     ) {
-        killallow = false;
+        allowSaucerKill = false;
         setTimeout(() => {
             saucerAnimationInspector();
             e.target.style =
@@ -171,48 +202,21 @@ document.addEventListener("mousedown", function (e) {
                 if (e.target.className === "saucer") {
                     e.target.remove();
                 }
-                killallow = true;
+                allowSaucerKill = true;
             }, 1000);
         }, 200);
         if (e.target.className === "saucer") {
+               createSaucer(saucerCloneElem, "saucerClone");
+            saucerCloneCounter++;
             setTimeout(() => {
-                saucerCounter++;
-                let elem = document.createElement("div");
-                elem.appendChild(elem.cloneNode(true));
-                elem.firstElementChild.appendChild(elem.cloneNode(true));
-                elem.className = "saucer";
-
-                if (saucerCounter % 4 == 0) {
-                    elem.id = "saucerX";
-                } else if (saucerCounter % 2 == 0) {
-                    elem.id = "saucerHigh";
-                } else if (saucerCounter % 3 == 0) {
-                    elem.id = "saucerMidRight";
-                } else {
-                    elem.id = "saucerLow";
-                }
-
-                body[0].appendChild(elem);
-                saucer = document.querySelectorAll(".saucer");
-
-                saucerAnimationInspector();
+                createSaucer(saucerElem, "saucer");
             }, 1500);
         }
 
         if (e.target.className === "saucerClone") {
             setTimeout(() => {
                 e.target.remove();
-            }, 2000);
-        }
-
-        if (saucerCounter % 2 == 0 && e.target.className === "saucer") {
-            let elem2 = document.createElement("div");
-            elem2.appendChild(elem2.cloneNode(true));
-            elem2.firstElementChild.appendChild(elem2.cloneNode(true));
-            elem2.className = "saucerClone";
-            elem2.id = "saucerX";
-            body[0].appendChild(elem2);
-            saucerClone = document.querySelectorAll(".saucerClone");
+            }, 1000);
         }
     }
     if (e.target.className === "star") {

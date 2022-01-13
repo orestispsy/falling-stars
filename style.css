@@ -298,6 +298,125 @@ body {
     color: yellow;
 }
 
+.cannon {
+    width: 0.2vmax;
+    height: 0.5vmax;
+    background-color: cyan;
+    transition: 0.07s;
+    border-radius: 3vh;
+}
+
+.base {
+    width: 3vmax;
+    height: 0.5vmax;
+    border-radius: 30%;
+    border-top: 1vmax ridge rgb(6, 54, 54);
+    z-index: 3;
+}
+
+.destroyer {
+    position: fixed;
+    bottom: 0.25vmax;
+    left: 0.5vmax;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 1.5vmax;
+}
+
+.wingsTop,
+.wingsBottom {
+    position: absolute;
+    width: 5vmax;
+    height: 0.5vmax;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.589);
+    border-left: 1px solid rgba(251, 255, 0, 0.289);
+    border-right: 1px solid rgba(255, 255, 0, 0.289);
+}
+
+.wingsBottom {
+    margin-top: 1vmax;
+    border-bottom: none;
+}
+
+.wingsTop {
+    display: flex;
+    justify-content: space-between;
+    width: 5.2vmax;
+}
+
+.rocket {
+    width: 0.2vmax;
+    height: 0.5vmax;
+    background-color: rgb(255, 251, 0);
+}
+
+.saucer div, .saucerClone div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 90%;
+    width: 2.2vmax;
+    height: 0.9vmax;
+    background-color: rgba(0, 0, 0, 0.562);
+}
+
+
+.saucer div div, .saucerClone div div {
+    border-radius: 90%;
+    width: 1vmax;
+    height: 0.2vmax;
+    background: radial-gradient(
+        closest-side,
+        rgb(176, 214, 5),
+      rgb(176, 214, 5),
+        rgba(0, 0, 0, 0.055),
+        transparent
+    );
+    animation: blinkSaucer 2s infinite;
+}
+
+.saucer, .saucerClone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: crosshair;
+    position: fixed;
+    left: -15vmax;
+    top: -0vmax;
+    width: 2vmax;
+    height: 2vmax;
+    background-color: #0a6d4f4f;
+    border-radius: 50%;
+    animation: saucerMoveR 20s;
+    animation-delay: 7s;
+    box-shadow: 0 0 150px rgb(255, 238, 0);
+    border: 1px solid rgba(0, 0, 0, 0.363);
+}
+
+#saucerLow {
+    animation: saucerMoveR 20s !important;
+    animation-delay: 3s;
+}
+
+#saucerHigh {
+    animation: saucerMove 20s !important;
+    animation-delay: 3s;
+}
+
+#saucerMidRight {
+    animation: saucerMoveC 20s !important;
+    animation-delay: 3s;
+}
+
+#saucerX {
+    animation: saucerMoveX 20s !important;
+    animation-delay: 3s;
+}
+
 @keyframes blink {
     0% {
         width: 1.5px;
@@ -502,119 +621,6 @@ body {
     }
 }
 
-@media only screen and (min-device-width: 100px) and (max-device-width: 480px) and (orientation: portrait) {
-    .ring {
-        border-bottom: 20px solid rgba(188, 250, 250, 0.151) !important;
-        border-top: 15px ridge rgba(0, 255, 255, 0.02) !important;
-        height: 8vh !important;
-        width: 98vw !important;
-        margin: 0 !important;
-    }
-
-    .welcomeBottom {
-        width: unset !important;
-    }
-
-    .welcome,
-    .welcome::before {
-        width: 75vw;
-        height: 75vw;
-    }
-
-    .welcome {
-        background-color: rgba(0, 255, 200, 0.171) !important;
-    }
-
-    #dot {
-        margin-bottom: -0.3vmax !important;
-    }
-
-    .linkDescription {
-        width: 50vw !important;
-        justify-content: unset !important;
-    }
-}
-
-@media only screen and (min-device-width: 273px) and (max-device-width: 1024px) and (orientation: landscape) {
-    .ring {
-        border-bottom: 20px solid rgba(188, 250, 250, 0.151) !important;
-        border-top: 15px ridge rgba(0, 255, 255, 0.02) !important;
-    }
-
-    .welcome {
-        background-color: rgba(0, 255, 200, 0.171) !important;
-    }
-
-    #dot {
-        margin-bottom: -0.3vmax !important;
-    }
-}
-
-.cannon {
-    width: 0.2vmax;
-    height: 0.5vmax;
-    background-color: cyan;
-    transition: 0.07s;
-    border-radius: 3vh;
-}
-
-.base {
-    width: 3vmax;
-    height: 0.5vmax;
-    border-radius: 30%;
-    border-top: 1vmax ridge rgb(6, 54, 54);
-    z-index: 3;
-}
-
-.destroyer {
-    position: fixed;
-    bottom: 0.25vmax;
-    left: 0.5vmax;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 1.5vmax;
-}
-
-.wingsTop,
-.wingsBottom {
-    position: absolute;
-    width: 5vmax;
-    height: 0.5vmax;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.589);
-    border-left: 1px solid rgba(251, 255, 0, 0.289);
-    border-right: 1px solid rgba(255, 255, 0, 0.289);
-}
-
-.wingsBottom {
-    margin-top: 1vmax;
-    border-bottom: none;
-}
-
-.wingsTop {
-    display: flex;
-    justify-content: space-between;
-    width: 5.2vmax;
-}
-
-.rocket {
-    width: 0.2vmax;
-    height: 0.5vmax;
-    background-color: rgb(255, 251, 0);
-}
-
-.saucer div, .saucerClone div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 90%;
-    width: 2.2vmax;
-    height: 0.9vmax;
-    background-color: rgba(0, 0, 0, 0.562);
-}
-
 @keyframes blinkSaucer {
     50% {
         background: radial-gradient(
@@ -627,58 +633,6 @@ body {
     }
 }
 
-.saucer div div, .saucerClone div div {
-    border-radius: 90%;
-    width: 1vmax;
-    height: 0.2vmax;
-    background: radial-gradient(
-        closest-side,
-        rgb(176, 214, 5),
-      rgb(176, 214, 5),
-        rgba(0, 0, 0, 0.055),
-        transparent
-    );
-    animation: blinkSaucer 2s infinite;
-}
-
-.saucer, .saucerClone {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: crosshair;
-    position: fixed;
-    left: -15vmax;
-    top: -0vmax;
-    width: 2vmax;
-    height: 2vmax;
-    background-color: #0a6d4f4f;
-    border-radius: 50%;
-    animation: saucerMoveR 20s;
-    animation-delay: 7s;
-    box-shadow: 0 0 150px rgb(255, 238, 0);
-    border: 1px solid rgba(0, 0, 0, 0.363);
-}
-
-#saucerLow {
-    animation: saucerMoveR 20s !important;
-    animation-delay: 3s;
-}
-
-#saucerHigh {
-    animation: saucerMove 20s !important;
-    animation-delay: 3s;
-}
-
-#saucerMidRight {
-    animation: saucerMoveC 20s !important;
-    animation-delay: 3s;
-}
-
-#saucerX {
-    animation: saucerMoveX 20s !important;
-    animation-delay: 3s;
-}
 
 @keyframes saucerMove {
     25% {
@@ -761,5 +715,53 @@ body {
     100% {
         left: 0%;
         top: -5%;
+    }
+}
+
+@media only screen and (min-device-width: 100px) and (max-device-width: 480px) and (orientation: portrait) {
+    .ring {
+        border-bottom: 20px solid rgba(188, 250, 250, 0.151) !important;
+        border-top: 15px ridge rgba(0, 255, 255, 0.02) !important;
+        height: 8vh !important;
+        width: 98vw !important;
+        margin: 0 !important;
+    }
+
+    .welcomeBottom {
+        width: unset !important;
+    }
+
+    .welcome,
+    .welcome::before {
+        width: 75vw;
+        height: 75vw;
+    }
+
+    .welcome {
+        background-color: rgba(0, 255, 200, 0.171) !important;
+    }
+
+    #dot {
+        margin-bottom: -0.3vmax !important;
+    }
+
+    .linkDescription {
+        width: 50vw !important;
+        justify-content: unset !important;
+    }
+}
+
+@media only screen and (min-device-width: 273px) and (max-device-width: 1024px) and (orientation: landscape) {
+    .ring {
+        border-bottom: 20px solid rgba(188, 250, 250, 0.151) !important;
+        border-top: 15px ridge rgba(0, 255, 255, 0.02) !important;
+    }
+
+    .welcome {
+        background-color: rgba(0, 255, 200, 0.171) !important;
+    }
+
+    #dot {
+        margin-bottom: -0.3vmax !important;
     }
 }
