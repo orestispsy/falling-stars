@@ -393,7 +393,7 @@ body {
     border-radius: 50%;
     animation: saucerMoveR 20s;
     animation-delay: 7s;
-    box-shadow: 0 0 150px rgb(255, 238, 0);
+    box-shadow: 0 0 50px rgba(132, 255, 204, 0.188);
     border: 1px solid rgba(0, 0, 0, 0.363);
 }
 

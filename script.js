@@ -136,35 +136,51 @@ document.addEventListener("mousedown", function (e) {
     }, 150);
 });
 
+const changeSaucerAnimation = () => {
+    if (saucerCounter % 4 == 0) {
+        saucer[0].id = "saucerX";
+    } else if (saucerCounter % 2 == 0) {
+        saucer[0].id = "saucerHigh";
+    } else if (saucerCounter % 3 == 0) {
+        saucer[0].id = "saucerMidRight";
+    } else {
+        saucer[0].id = "saucerLow";
+    }
+};
+
 const saucerAnimationInspector = () => {
-    saucer[saucer.length - 1].addEventListener("animationend", () => {
-        console.log("yo");
+    saucer[0].addEventListener("animationend", () => {
         saucerCounter++;
-        if (saucerCounter % 4 == 0) {
-            saucer[0].id = "saucerX";
-        } else if (saucerCounter % 2 == 0) {
-            saucer[0].id = "saucerHigh";
-        } else if (saucerCounter % 3 == 0) {
-            saucer[0].id = "saucerMidRight";
-        } else {
-            saucer[0].id = "saucerLow";
-        }
+        changeSaucerAnimation()
+        
     });
+
     if (saucerClone) {
         saucerClone[0].addEventListener("animationend", () => {
+            allowSaucerKill = false;
             saucerClone.forEach((saucer) => {
-                saucer.style = `  transform: translateY(-100vh); transition:5s`;
+                saucer.style = `  transform: translateY(-100vh); transition:3s`;
             });
+              saucer = document.querySelectorAll(`.saucer`);
+              saucer[0].addEventListener("animationend", () => {
+                  saucerCounter++;
+                     changeSaucerAnimation();
+              });
             setTimeout(() => {
                 for (let i = 0; i < saucerClone.length; i++) {
                     saucerClone[i].remove();
                 }
-            }, 5000);
+                allowSaucerKill = true;
+                saucerClone = false;
+              
+              
+            }, 2000);
         });
     }
 };
 
 saucerAnimationInspector();
+
 
 
 const createSaucer = (prop1, prop2) => {
@@ -183,9 +199,8 @@ const createSaucer = (prop1, prop2) => {
         prop1.id = "saucerLow";
     }
     body[0].appendChild(prop1);
-    saucer = document.querySelectorAll(`.saucer`);
-    saucerClone = document.querySelectorAll(`.saucerClone`);
-    saucerAnimationInspector();
+         saucer = document.querySelectorAll(`.saucer`);
+         saucerClone = document.querySelectorAll(`.saucerClone`);
 };
 
 document.addEventListener("mousedown", function (e) {
@@ -195,7 +210,6 @@ document.addEventListener("mousedown", function (e) {
     ) {
         allowSaucerKill = false;
         setTimeout(() => {
-            saucerAnimationInspector();
             e.target.style =
                 "transform:translateY(100vh) translateX(-5vw) rotate(-360deg); transition:1s";
             setTimeout(() => {
@@ -203,19 +217,23 @@ document.addEventListener("mousedown", function (e) {
                     e.target.remove();
                 }
                 allowSaucerKill = true;
-            }, 1000);
+            }, 2000);
         }, 200);
         if (e.target.className === "saucer") {
-               createSaucer(saucerCloneElem, "saucerClone");
+            createSaucer(saucerCloneElem, "saucerClone");
             saucerCloneCounter++;
-            setTimeout(() => {
-                createSaucer(saucerElem, "saucer");
-            }, 1500);
+            createSaucer(saucerElem, "saucer");
+       
+            saucerAnimationInspector();
         }
 
         if (e.target.className === "saucerClone") {
             setTimeout(() => {
                 e.target.remove();
+                createSaucer(saucerCloneElem, "saucerClone");
+                saucer = document.querySelectorAll(`.saucer`);
+                saucerClone = document.querySelectorAll(`.saucerClone`);
+                saucerAnimationInspector();
             }, 1000);
         }
     }

@@ -1,3 +1,3 @@
-A short script creating a night sky full of stars falling.
+Landing Page for main domain
 
 https://zero-psy.com
