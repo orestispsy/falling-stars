@@ -1,27 +1,30 @@
-var body = document.querySelectorAll("body");
-var ring = document.querySelectorAll(".ring");
-var sky = document.querySelectorAll(".sky");
-var linkDescription = document.querySelectorAll(".linkDescription");
-var links = document.querySelectorAll("a");
-var dots = document.querySelectorAll("#dot");
-var destroyer = document.querySelectorAll(".destroyer");
-var cannon = document.querySelectorAll(".cannon");
-var rockets = document.querySelectorAll(".rocket");
-var wingsTop = document.querySelectorAll(".wingsTop");
-var saucer = document.querySelectorAll(".saucer");
-var saucerClone = false;
+let body = document.querySelectorAll("body");
+let ring = document.querySelectorAll(".ring");
+let sky = document.querySelectorAll(".sky");
+let linkDescription = document.querySelectorAll(".linkDescription");
+let links = document.querySelectorAll("a");
+let projectOuter = document.querySelectorAll(".projectOuter");
+let dots = document.querySelectorAll(".dot");
+let destroyer = document.querySelectorAll(".destroyer");
+let cannon = document.querySelectorAll(".cannon");
+let rockets = document.querySelectorAll(".rocket");
+let wingsTop = document.querySelectorAll(".wingsTop");
+let saucer = document.querySelectorAll(".saucer");
+let projects = document.querySelectorAll(".project");
+let saucerClone = false;
 
-var introStar;
+let introStar;
 let starCount = 0;
 let projectsCounter = 0;
 let dotCounter = 0;
 let ringIsLeft = true;
 
+let destroyerMove = false;
 let saucerElem;
 let saucerCloneElem;
-var allowSaucerKill = true;
-var saucerCounter = 1;
-var saucerCloneCounter = 1;
+let allowSaucerKill = true;
+let saucerCounter = 1;
+let saucerCloneCounter = 1;
 
 const createStar = () => {
     let star = document.createElement("div");
@@ -94,6 +97,8 @@ setTimeout(() => {
 
 setTimeout(() => {
     introStar[0].remove();
+    destroyerMove = true;
+    runDotAnime();
 }, 7000);
 
 document.addEventListener("mousedown", function (e) {
@@ -151,8 +156,7 @@ const changeSaucerAnimation = () => {
 const saucerAnimationInspector = () => {
     saucer[0].addEventListener("animationend", () => {
         saucerCounter++;
-        changeSaucerAnimation()
-        
+        changeSaucerAnimation();
     });
 
     if (saucerClone) {
@@ -161,27 +165,23 @@ const saucerAnimationInspector = () => {
             saucerClone.forEach((saucer) => {
                 saucer.style = `  transform: translateY(-100vh); transition:3s`;
             });
-              saucer = document.querySelectorAll(`.saucer`);
-              saucer[0].addEventListener("animationend", () => {
-                  saucerCounter++;
-                     changeSaucerAnimation();
-              });
+            saucer = document.querySelectorAll(`.saucer`);
+            saucer[0].addEventListener("animationend", () => {
+                saucerCounter++;
+                changeSaucerAnimation();
+            });
             setTimeout(() => {
                 for (let i = 0; i < saucerClone.length; i++) {
                     saucerClone[i].remove();
                 }
                 allowSaucerKill = true;
                 saucerClone = false;
-              
-              
             }, 2000);
         });
     }
 };
 
 saucerAnimationInspector();
-
-
 
 const createSaucer = (prop1, prop2) => {
     saucerCounter++;
@@ -199,37 +199,56 @@ const createSaucer = (prop1, prop2) => {
         prop1.id = "saucerLow";
     }
     body[0].appendChild(prop1);
-         saucer = document.querySelectorAll(`.saucer`);
-         saucerClone = document.querySelectorAll(`.saucerClone`);
+    saucer = document.querySelectorAll(`.saucer`);
+    saucerClone = document.querySelectorAll(`.saucerClone`);
 };
 
 document.addEventListener("mousedown", function (e) {
     if (
         (e.target.className === "saucer" && allowSaucerKill) ||
-        (e.target.className === "saucerClone" && allowSaucerKill)
+        (e.target.className === "saucerClone" && allowSaucerKill) ||
+        (e.target.offsetParent &&
+            e.target.offsetParent.className === "saucer" &&
+            allowSaucerKill) ||
+        (e.target.offsetParent &&
+            e.target.offsetParent.className === "saucerClone" &&
+            allowSaucerKill)
     ) {
+        let saucerHelper;
+        if (
+            e.target.offsetParent.className === "saucer" ||
+            e.target.offsetParent.className === "saucerClone"
+        ) {
+            saucerHelper = e.target.offsetParent;
+        } else if (
+            e.target.className === "saucer" ||
+            e.target.className === "saucerClone"
+        ) {
+            saucerHelper = e.target;
+        }
         allowSaucerKill = false;
         setTimeout(() => {
-            e.target.style =
+            saucerHelper.style =
                 "transform:translateY(100vh) translateX(-5vw) rotate(-360deg); transition:1s";
             setTimeout(() => {
-                if (e.target.className === "saucer") {
-                    e.target.remove();
+                if (saucerHelper.className === "saucer") {
+                    saucerHelper.remove();
                 }
                 allowSaucerKill = true;
             }, 2000);
         }, 200);
-        if (e.target.className === "saucer") {
+        if (saucerHelper.className === "saucer") {
             createSaucer(saucerCloneElem, "saucerClone");
             saucerCloneCounter++;
             createSaucer(saucerElem, "saucer");
-       
+
             saucerAnimationInspector();
         }
 
-        if (e.target.className === "saucerClone") {
+        if (saucerHelper.className === "saucerClone") {
             setTimeout(() => {
-                e.target.remove();
+                saucerHelper.remove();
+
                 createSaucer(saucerCloneElem, "saucerClone");
                 saucer = document.querySelectorAll(`.saucer`);
                 saucerClone = document.querySelectorAll(`.saucerClone`);
@@ -257,14 +276,39 @@ setTimeout(() => {
 }, 1500);
 
 document.addEventListener("click", function (e) {
+    if (
+        e.target.id.includes("link") &&
+        e.target.className !== `projectHighlight`
+    ) {
+        links.forEach((link) => {
+            link.className = `project`;
+            link.offsetParent.id = ``;
+        });
+        e.target.className = `projectHighlight`;
+        e.target.offsetParent.id = `clickedProject`;
+    } else if (
+        e.target.id.includes("link") &&
+        e.target.className === `projectHighlight`
+    ) {
+        linkDescription[0].style = `visibility:hidden; animation:none;`;
+    } else {
+        links.forEach((link) => {
+            link.className = `project`;
+            link.offsetParent.id = ``;
+        });
+    }
+
     if (e.target.id.includes("link")) {
-        linkDescription[0].style = `visibility:visible;  animation: fadeIn 4s;`;
+        linkDescription[0].style = `visibility:visible;
+          animation: fadeIn 4s; `;
         if (ringIsLeft) {
             ringIsLeft = false;
+
             ring[0].style =
                 "visibility:visible; transform: rotate(0.55turn); transition:3.5s";
         } else {
             ringIsLeft = true;
+
             ring[0].style =
                 "visibility:visible; transform: rotate(0.45turn); transition:3.5s";
         }
@@ -274,7 +318,7 @@ document.addEventListener("click", function (e) {
                 "Learn More About Me And My Work<a href='https://zero-psy.com/portfolio' target='_blank'>Visit Page</a>";
         } else if (e.target.id === "link2") {
             linkDescription[0].innerHTML =
-                "A Concert Agenda & Fan Based Social Network with Admin Tools for the Greek Band 1000mods <a href='https://1000gigs.zero-psy.com' target='_blank'>Visit Page</a>";
+                "A Rock Band's Online Concert Agenda & Fan-Based Social Network <a href='https://1000gigs.zero-psy.com' target='_blank'>Visit Page</a>";
         } else if (e.target.id === "link3") {
             linkDescription[0].innerHTML = `Connect4 - The Game <a href='https://zero-psy.com/c4' target='_blank'>Visit Page</a>`;
         }
@@ -286,8 +330,8 @@ document.addEventListener("click", function (e) {
 const runFeaturingProjAnimation = () => {
     if (projectsCounter < links.length) {
         setTimeout(() => {
-            links[projectsCounter].style =
-                "visibility: visible; animation: fadeIn 2s ease-in-out";
+            projectOuter[projectsCounter].style =
+                "visibility: visible; animation: fadeIn 2s ease-in-out;";
             projectsCounter++;
             runFeaturingProjAnimation();
         }, 300);
@@ -354,8 +398,12 @@ const runDotAnimeRewind = () => {
     }
 };
 
-runDotAnime();
-
 document.addEventListener("mousemove", function (e) {
-    destroyer[0].style = `left:${e.clientX - 0.5 * destroyer[0].offsetWidth}px`;
+    if (destroyerMove) {
+        destroyer[0].style = `visibility:visible; left:${
+            e.clientX - 0.5 * destroyer[0].offsetWidth
+        }px`;
+    }
 });
+
+console.log(document);

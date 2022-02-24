@@ -124,6 +124,7 @@ body {
     height: 15vh;
     margin-top: 10vh;
     visibility: hidden;
+    z-index: 3;
 }
 
 .welcome::before {
@@ -189,21 +190,32 @@ body {
     color: white;
 }
 
-#dot {
+.dot {
     visibility: hidden;
+}
+
+.headSmallOuter {
+    transform: skew(20deg);
+    border: 2px solid rgba(255, 255, 255, 0.096);
+    width: 40.5vw;
+    margin: 0 -2vw;
+    background: rgba(0, 0, 0, 0.315);
+    padding: 0.4vmax 0;
+    animation: fadeIn 6s ease-in-out;
 }
 
 .headSmall {
     display: flex;
     z-index: 3;
     font-size: 1.5vmax;
-    text-shadow: -0 0 10px rgba(0, 255, 255, 0.11),
-        0 -0 10px rgba(0, 255, 255, 0.11), -0 -0 10px rgba(0, 255, 255, 0.11),
-        -0 -0 10px rgba(0, 255, 255, 0.11);
+    text-shadow: -2px 2px 0 rgba(0, 255, 255, 0.05),
+        2px -2px 0 rgba(0, 255, 255, 0.05), -2px -2px 0 rgba(0, 255, 255, 0.05),
+        2px 2px 0 rgba(0, 255, 255, 0.05);
     color: black;
-    padding: 1vmax;
-    animation: fadeIn 4s ease-in-out, 3s flash 2s ease-in-out;
-    margin-left: 3vmax;
+    padding: 0.5vmax;
+    animation: fadeIn 4s ease-in-out;
+    margin-left: 5vmax;
+    transform: skew(-18deg);
 }
 
 .headSmall::before {
@@ -226,7 +238,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 1vmax;
 }
 
 .welcomeBottom {
@@ -236,28 +247,64 @@ body {
     align-items: center;
     justify-content: center;
     width: 42vw;
-    margin-top: 2vmax;
+    height: 10vh;
+    margin-bottom: 1vmax;
 }
 
-.welcomeBottom a {
+.projectHighlight {
+    background: linear-gradient(to right, #fffc5f, #31fbe0) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    transition: all 0.5s;
+}
+
+.projectOuter {
+    margin: 0 0.4vmax;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    background: rgba(0, 0, 0, 0.445);
+    transform: skew(-20deg);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.329);
+    border: 2px solid rgba(255, 255, 255, 0.096);
+    transition: 0.5s;
+}
+
+.projectOuter:hover {
+    background: rgb(0, 0, 0);
+    border: 2px solid transparent;
+}
+
+#clickedProject {
+    background: rgb(0, 0, 0);
+    border: 2px solid transparent;
+}
+
+.project,
+.projectHighlight {
     text-align: center;
     text-decoration: none;
-    padding: 0.8vmax;
-    margin: 0 1vmax -2vmax 1vmax;
-    background-color: rgba(0, 0, 0, 0.507);
     color: white;
-    outline: 5px solid transparent;
-    border: 5px dotted transparent;
     z-index: 3;
     line-height: 1.5vmax;
-    visibility: hidden;
     cursor: crosshair;
+    background: linear-gradient(to right, #fffc5f71, #31fbe071);
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    transform: skew(20deg);
+    white-space: nowrap;
+    padding: 1vmax;
 }
 
-.welcomeBottom a:hover {
-    outline: 5px solid black;
-    border: 5px dashed rgba(0, 238, 255, 0.418);
-    background-color: rgba(0, 0, 0, 0.712);
+.project:hover {
+    background: linear-gradient(to right, #fffc5f, #31fbe0) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
 }
 
 .footer {
@@ -274,9 +321,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 4vmax;
-    margin-bottom: -3vmax;
-    width: 30vw;
+    margin-top: 1vmax;
+
+    width: 25vw;
     height: 15vh;
     visibility: hidden;
     text-align: center;
@@ -286,6 +333,8 @@ body {
     font-size: 1vmax;
     text-shadow: -0 0 5px black, 0 -0 5px black, -0 -0 5px black,
         -0 -0 5px black;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1.5px;
 }
 
 .linkDescription a {
@@ -304,6 +353,7 @@ body {
     background-color: cyan;
     transition: 0.07s;
     border-radius: 3vh;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.288);
 }
 
 .base {
@@ -312,6 +362,7 @@ body {
     border-radius: 30%;
     border-top: 1vmax ridge rgb(6, 54, 54);
     z-index: 3;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.288);
 }
 
 .destroyer {
@@ -323,6 +374,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 1.5vmax;
+    visibility: hidden;
 }
 
 .wingsTop,
@@ -350,9 +402,11 @@ body {
     width: 0.2vmax;
     height: 0.5vmax;
     background-color: rgb(255, 251, 0);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.288);
 }
 
-.saucer div, .saucerClone div {
+.saucer div,
+.saucerClone div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -363,22 +417,23 @@ body {
     background-color: rgba(0, 0, 0, 0.562);
 }
 
-
-.saucer div div, .saucerClone div div {
+.saucer div div,
+.saucerClone div div {
     border-radius: 90%;
     width: 1vmax;
     height: 0.2vmax;
     background: radial-gradient(
         closest-side,
         rgb(176, 214, 5),
-      rgb(176, 214, 5),
+        rgb(176, 214, 5),
         rgba(0, 0, 0, 0.055),
         transparent
     );
     animation: blinkSaucer 2s infinite;
 }
 
-.saucer, .saucerClone {
+.saucer,
+.saucerClone {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -633,7 +688,6 @@ body {
     }
 }
 
-
 @keyframes saucerMove {
     25% {
         left: 35%;
@@ -741,7 +795,7 @@ body {
         background-color: rgba(0, 255, 200, 0.171) !important;
     }
 
-    #dot {
+    .dot {
         margin-bottom: -0.3vmax !important;
     }
 
@@ -761,7 +815,7 @@ body {
         background-color: rgba(0, 255, 200, 0.171) !important;
     }
 
-    #dot {
+    .dot {
         margin-bottom: -0.3vmax !important;
     }
 }
